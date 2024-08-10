@@ -371,9 +371,9 @@ def Saturation(X, gray=False):
     M = X.shape[0];  N = X.shape[1]
     if X.max()<=250:
         if not gray:
-            SaturMap = np.ones(X.shape,dtype=np.bool)
+            SaturMap = np.ones(X.shape,dtype=bool)
         else:
-            SaturMap = np.ones([M,N],dtype=np.bool)
+            SaturMap = np.ones([M,N],dtype=bool)
         return SaturMap
     
     SaturMap = np.ones([M,N],dtype=int8)
