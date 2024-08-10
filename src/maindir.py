@@ -88,7 +88,7 @@ def _RemoveNeighborhood(X,x,ssize):
     # ssize     square neighborhood has size (ssize x ssize) square
     [M,N] = X.shape
     radius = (ssize-1)/2
-    X = np.roll(X,[np.int(radius-x[0]),np.int(radius-x[1])], axis=[0,1]) 
+    X = np.roll(X,[int(radius-x[0]),int(radius-x[1])], axis=[0,1]) 
     Y = X[ssize:,:ssize];   Y = Y.flatten()
     Y = np.concatenate([Y, X.flatten()[int(M*ssize):]], axis=0)
     return Y
