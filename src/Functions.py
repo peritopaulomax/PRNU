@@ -242,11 +242,11 @@ def NoiseExtract(Im,qmf,sigma,L):
     m = 2**L
     # use padding with mirrored image content
     minpad=2    # minimum number of padded rows and columns as well
-    nr = (np.ceil((M+minpad)/m)*m).astype(np.int);  nc = (np.ceil((N+minpad)/m)*m).astype(np.int)  # dimensions of the padded image (always pad 8 pixels or more)
-    pr = np.ceil((nr-M)/2).astype(np.int)      # number of padded rows on the top
-    prd= np.floor((nr-M)/2).astype(np.int)    # number of padded rows at the bottom
-    pc = np.ceil((nc-N)/2).astype(np.int)      # number of padded columns on the left
-    pcr= np.floor((nc-N)/2).astype(np.int)     # number of padded columns on the right
+    nr = (np.ceil((M+minpad)/m)*m).astype(int);  nc = (np.ceil((N+minpad)/m)*m).astype(int)  # dimensions of the padded image (always pad 8 pixels or more)
+    pr = np.ceil((nr-M)/2).astype(int)      # number of padded rows on the top
+    prd= np.floor((nr-M)/2).astype(int)    # number of padded rows at the bottom
+    pc = np.ceil((nc-N)/2).astype(int)      # number of padded columns on the left
+    pcr= np.floor((nc-N)/2).astype(int)     # number of padded columns on the right
     Im = np.block([
         [ Im[pr-1::-1,pc-1::-1],       Im[pr-1::-1,:],       Im[pr-1::-1,N-1:N-pcr-1:-1]],
         [ Im[:,pc-1::-1],              Im,                   Im[:,N-1:N-pcr-1:-1] ],
@@ -376,7 +376,7 @@ def Saturation(X, gray=False):
             SaturMap = np.ones([M,N],dtype=np.bool)
         return SaturMap
     
-    SaturMap = np.ones([M,N],dtype=np.int8)
+    SaturMap = np.ones([M,N],dtype=int8)
     
     Xh = X - np.roll(X, 1, axis=1)
     Xv = X - np.roll(X, 1, axis=0)
