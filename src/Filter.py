@@ -55,12 +55,12 @@ def WaveNoise(coef, NoiseVar):
 
     tc = np.power(coef, 2)
     coefVar = Threshold(
-        signal.fftconvolve(tc, np.ones([3, 3], dtype=np.float32) / (3 * 3), mode='same'),
+        signal.fftconvolve(tc, np.ones([3, 3], dtype=float32) / (3 * 3), mode='same'),
         NoiseVar)
 
     for w in range(5, 9 + 1, 2):
         EstVar = Threshold(
-            signal.fftconvolve(tc, np.ones([w, w], dtype=np.float32) / (w * w), mode='same'),
+            signal.fftconvolve(tc, np.ones([w, w], dtype=float32) / (w * w), mode='same'),
             NoiseVar)
         coefVar = np.minimum(coefVar, EstVar)
 
@@ -158,9 +158,9 @@ def NoiseExtractFromImage(image, sigma=3.0, color=False, noZM=False):
     M0, N0, three = X.shape
     if X.dtype == 'uint8':
         # convert to [0,255]
-        X = X.astype(np.float)
+        X = X.astype(float)
     elif X.dtype == 'uint16':
-        X = X.astype(np.float) / 65535 * 255
+        X = X.astype(float) / 65535 * 255
 
     qmf = [ 	.230377813309,	.714846570553, .630880767930, -.027983769417,
            -.187034811719,	.030841381836, .032883011667, -.010597401785]
@@ -179,7 +179,7 @@ def NoiseExtractFromImage(image, sigma=3.0, color=False, noZM=False):
     else:
         Noise, _ = Fu.ZeroMeanTotal(Noise)
 
-    #Noise = Noise.astype(np.float)
+    #Noise = Noise.astype(float)
 
     return Noise
 
@@ -241,11 +241,11 @@ def mdwt(x, h, L):
     def _MDWT(x, h, L):
         lh = len(h)
         _m, _n = x.shape[0], x.shape[1]  
-        y = np.zeros([_m,_n], dtype=np.float32)
+        y = np.zeros([_m,_n], dtype=float32)
         
-        xdummy  = np.zeros([max(_m,_n) + lh-1], dtype=np.float32)
-        ydummyl = np.zeros([max(_m,_n)], dtype=np.float32)
-        ydummyh = np.zeros([max(_m,_n)], dtype=np.float32)
+        xdummy  = np.zeros([max(_m,_n) + lh-1], dtype=float32)
+        ydummyl = np.zeros([max(_m,_n)], dtype=float32)
+        ydummyh = np.zeros([max(_m,_n)], dtype=float32)
         
         # analysis lowpass and highpass
         if _n == 1:
@@ -362,9 +362,9 @@ def midwt(y, h, L):
     def _MIDWT(y, h, L):
         lh = len(h)
         _m, _n = y.shape[0], y.shape[1]
-        xdummy  = np.zeros([max(_m, _n)], dtype=np.float32)
-        ydummyl = np.zeros([max(_m, _n)+lh//2-1], dtype=np.float32)
-        ydummyh = np.zeros([max(_m, _n)+lh//2-1], dtype=np.float32)
+        xdummy  = np.zeros([max(_m, _n)], dtype=float32)
+        ydummyl = np.zeros([max(_m, _n)+lh//2-1], dtype=float32)
+        ydummyh = np.zeros([max(_m, _n)+lh//2-1], dtype=float32)
         
         # synthesis lowpass and highpass
         if _n == 1:
